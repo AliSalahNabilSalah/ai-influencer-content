@@ -4,15 +4,16 @@ import { useState } from 'react';
 import { Link, Target, Layers, Users, MessageSquare, FileText, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { PlatformIcon } from '@/components/PlatformIcon';
 import type { CampaignFormData, Platform } from '@/types';
 
-const PLATFORMS: { value: Platform; label: string; icon: string; urlPattern: RegExp; placeholder: string }[] = [
-  { value: 'instagram', label: 'إنستجرام', icon: '📸', urlPattern: /instagram\.com\//i, placeholder: 'https://instagram.com/username' },
-  { value: 'tiktok',    label: 'تيك توك',   icon: '🎵', urlPattern: /tiktok\.com\//i,    placeholder: 'https://tiktok.com/@username' },
-  { value: 'snapchat',  label: 'سناب شات',  icon: '👻', urlPattern: /snapchat\.com\//i,  placeholder: 'https://snapchat.com/add/username' },
-  { value: 'youtube',   label: 'يوتيوب',    icon: '▶️', urlPattern: /youtube\.com\//i,   placeholder: 'https://youtube.com/@channel' },
-  { value: 'twitter',   label: 'تويتر / X', icon: '𝕏',  urlPattern: /(twitter\.com|x\.com)\//i, placeholder: 'https://x.com/username' },
-  { value: 'facebook',  label: 'فيسبوك',    icon: '📘', urlPattern: /facebook\.com\//i,  placeholder: 'https://facebook.com/page' },
+const PLATFORMS: { value: Platform; label: string; urlPattern: RegExp; placeholder: string }[] = [
+  { value: 'instagram', label: 'إنستجرام', urlPattern: /instagram\.com\//i, placeholder: 'https://instagram.com/username' },
+  { value: 'tiktok',    label: 'تيك توك',  urlPattern: /tiktok\.com\//i,    placeholder: 'https://tiktok.com/@username' },
+  { value: 'snapchat',  label: 'سناب شات', urlPattern: /snapchat\.com\//i,  placeholder: 'https://snapchat.com/add/username' },
+  { value: 'youtube',   label: 'يوتيوب',   urlPattern: /youtube\.com\//i,   placeholder: 'https://youtube.com/@channel' },
+  { value: 'twitter',   label: 'تويتر / X',urlPattern: /(twitter\.com|x\.com)\//i, placeholder: 'https://x.com/username' },
+  { value: 'facebook',  label: 'فيسبوك',   urlPattern: /facebook\.com\//i,  placeholder: 'https://facebook.com/page' },
 ];
 
 const CAMPAIGN_GOALS = [
@@ -212,9 +213,9 @@ export function CampaignForm({ onSubmit, isLoading }: CampaignFormProps) {
                     ? 'bg-gray-900 border-gray-900 text-white shadow-md scale-105'
                     : 'bg-white border-gray-200 text-gray-600 hover:border-gray-400 hover:bg-gray-50'
                 )}>
-                <span>{p.icon}</span>
+                <PlatformIcon platform={p.value} size={15} colored={!selected} className={selected ? 'text-white' : ''} />
                 <span>{p.label}</span>
-                {selected && <span className="text-xs">✓</span>}
+                {selected && <CheckCircle2 className="w-3.5 h-3.5" />}
               </button>
             );
           })}
@@ -249,7 +250,9 @@ export function CampaignForm({ onSubmit, isLoading }: CampaignFormProps) {
               const isValid = urlVal && !hasError;
               return (
                 <div key={platform} className="flex items-center gap-3">
-                  <span className="text-base flex-shrink-0 w-7 text-center">{p.icon}</span>
+                  <span className="flex-shrink-0 w-7 flex items-center justify-center">
+                    <PlatformIcon platform={platform} size={16} colored={true} />
+                  </span>
                   <span className="text-xs font-medium text-gray-600 w-20 flex-shrink-0">{p.label}</span>
                   <div className="flex-1 relative">
                     <input

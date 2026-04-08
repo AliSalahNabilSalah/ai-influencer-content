@@ -14,3 +14,9 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     result: session.result ? JSON.parse(session.result) : null,
   });
 }
+
+export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  await prisma.influencerSession.delete({ where: { id } });
+  return NextResponse.json({ success: true });
+}
