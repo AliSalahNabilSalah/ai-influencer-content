@@ -55,7 +55,7 @@ export function Sidebar({ activeSessionId, onSelectSession, onNewCampaign, refre
       style={{ background: '#ffffff', borderLeft: '1px solid #ebebf0' }}
     >
       {/* Logo */}
-      <div className="px-6 py-5 border-b" style={{ borderColor: '#ebebf0' }}>
+      <div className="px-6 py-5 border-b flex justify-center" style={{ borderColor: '#ebebf0' }}>
         <NojomLogo size="md" className="text-gray-900" />
       </div>
 
