@@ -14,7 +14,7 @@ export async function GET() {
     },
   });
 
-  return NextResponse.json(sessions.map(s => ({
+  return NextResponse.json(sessions.map((s: typeof sessions[number]) => ({
     ...s,
     platforms: JSON.parse(s.platforms),
   })));
